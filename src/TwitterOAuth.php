@@ -293,7 +293,7 @@ class TwitterOAuth extends Config
     private function uploadMediaNotChunked($path, array $parameters)
     {
         if (($file = @file_get_contents($parameters['media'])) === false) {
-            throw new \InvalidArgumentException('You must supply a readable file');
+            throw new \InvalidArgumentException('Unprocessable entity: Missing or invalid image file', 422);
         }
         $parameters['media'] = base64_encode($file);
         return $this->http('POST', self::UPLOAD_HOST, $path, $parameters, false);
