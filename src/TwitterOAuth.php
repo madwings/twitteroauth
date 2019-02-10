@@ -289,11 +289,12 @@ class TwitterOAuth extends Config
      * @param array  $parameters
      *
      * @return array|object
+     * @throws TwitterOAuthException
      */
     private function uploadMediaNotChunked($path, array $parameters)
     {
         if (($file = @file_get_contents($parameters['media'])) === false) {
-            throw new \InvalidArgumentException('Unprocessable entity: Missing or invalid image file', 422);
+            throw new TwitterOAuthException('Unprocessable entity: Missing or invalid image file', 422);
         }
         $parameters['media'] = base64_encode($file);
         return $this->http('POST', self::UPLOAD_HOST, $path, $parameters, false);
