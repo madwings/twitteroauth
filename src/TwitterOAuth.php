@@ -341,10 +341,20 @@ class TwitterOAuth extends Config
      */
     private function mediaInitParameters(array $parameters)
     {
+        // Get the size of the file WITHOUT downloading the file, by doing a
+        // HEAD request and get the value of the Content-Length property
+        // NOTE: This will NOT work if the server doesn't send Content-Length back
+        // This is working for RackSpace and AWS S3
+        $headers = get_headers($parameters['media'], TRUE);
+        $filesize = $headers['Content-Length'];
+
+        // If Content-Length is not present in the future if we switch to something else
+        // we can use $filesize = strlen(file_get_contents($parameters['media']));
+        
         $return = [
             'command' => 'INIT',
             'media_type' => $parameters['media_type'],
-            'total_bytes' => filesize($parameters['media'])
+            'total_bytes' => $filesize
         ];
         if (isset($parameters['additional_owners'])) {
             $return['additional_owners'] = $parameters['additional_owners'];
