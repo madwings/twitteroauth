@@ -9,17 +9,18 @@
   "devDependencies": {
     "@prettier/plugin-php": "^0.14.3",
     "concurrently": "^5.3.0",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "cross-env": "^7.0.2"
   },
   "scripts": {
-    "fix:phpcbf": "./vendor/bin/phpcbf src tests --standard=PSR12",
+    "fix:phpcbf": "cross-env ./vendor/bin/phpcbf src tests --standard=PSR12",
     "fix:prettier": "prettier . --write",
     "fix": "concurrently npm:fix:*",
-    "lint:phpcs": "./vendor/bin/phpcs src tests --standard=PSR12",
+    "lint:phpcs": "cross-env ./vendor/bin/phpcs src tests --standard=PSR12",
     "lint:prettier": "prettier . --check",
     "lint": "concurrently npm:lint:*",
     "postinstall": "composer install --no-interaction",
-    "test": "./vendor/bin/phpunit"
+    "test": "cross-env ./vendor/bin/phpunit"
   },
   "repository": {
     "type": "git",
