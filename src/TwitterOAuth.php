@@ -329,7 +329,7 @@ class TwitterOAuth extends Config
     private function uploadMediaNotChunked(string $path, array $parameters)
     {
         if (($file = @file_get_contents($parameters['media'])) === false) {
-            throw new InvalidArgumentException('Unprocessable media item: Missing or invalid file', 422);
+            throw new \InvalidArgumentException('Unprocessable media item: Missing or invalid file', 422);
         }
         $parameters['media'] = base64_encode($file);
         return $this->http(
