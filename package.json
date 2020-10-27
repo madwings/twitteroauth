@@ -20,7 +20,7 @@
     "lint:prettier": "prettier . --check",
     "lint": "concurrently npm:lint:*",
     "postinstall": "composer install --no-interaction",
-    "test": "cross-env ./vendor/bin/phpunit"
+    "test": "./vendor/bin/phpunit"
   },
   "repository": {
     "type": "git",
